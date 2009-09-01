@@ -1,9 +1,7 @@
 (function() {
   $.pageSlider = {
     options: { 
-      containerSelector: '#maincontent',
-      sidebarSelector:   '.sidebar-section',
-      blockClass: 'scrollblock'
+      containerSelector: '#maincontent'
     },
     canAnimate: !($.browser.msie && (parseInt($.browser.version) < 7)),
     canAnimateBrowserHeight: $.browser.safari
@@ -16,7 +14,7 @@
 
     options       = $.extend({}, $.pageSlider.options, options);
     var container = $(options.containerSelector),
-        blocks    = $('.' + options.blockClass),
+        blocks    = this,
         firstrun  = true;
     
     // Initialize the offsets once everything has settled
@@ -43,8 +41,7 @@
     
     function handleHistoryChange(anchor_name) {
       var page      = blocks.filter('[title=' + anchor_name + ']'),
-          offsetTop = page.data('offsetTop'),
-          link      = $(options.sidebarSelector + ' a[href=#' + anchor_name + ']');
+          offsetTop = page.data('offsetTop');
       
       // Event allowing other items to change with the block (for example, highlight the next page in the nav)
       $(document).trigger('changingPage', [anchor_name]);
